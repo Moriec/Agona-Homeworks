@@ -31,4 +31,8 @@ public class User {
     private String getPassword() {
         return password;
     }
+
+    private void systemOutHello(String name, String email) {
+        System.out.println("Hello " + name + " " + email);
+    }
 }

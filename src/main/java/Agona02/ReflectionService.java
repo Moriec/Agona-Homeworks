@@ -1,9 +1,6 @@
 package Agona02;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -114,5 +111,30 @@ public class ReflectionService {
             methodsNames[i] = methods[i].getName();
         }
         return methodsNames;
+    }
+
+    /*
+    Создать метод, который на вход принимает объект,
+    имя метода и Object..(список параметров этого метода), в этом методе инвокнуть его
+     */
+    public static void invokeMethod(Object obj, String methodName, Object... args) {
+        Class<?> clazz = obj.getClass();
+        Class<?>[] parameterTypes = new Class[args.length];
+        for (int i = 0; i < args.length; i++) {
+            parameterTypes[i] = args[i].getClass();
+        }
+        try {
+            Method method = clazz.getDeclaredMethod(methodName, parameterTypes);
+            try {
+                method.invoke(obj, args);
+            } catch (IllegalAccessException e) {
+                method.setAccessible(true);
+                method.invoke(obj, args);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
