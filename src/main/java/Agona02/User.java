@@ -1,6 +1,8 @@
 package Agona02;
 
-public class User {
+import java.io.Serializable;
+
+public class User extends AbstractUser1 implements Serializable {
     private String password;
     private Integer age;
 

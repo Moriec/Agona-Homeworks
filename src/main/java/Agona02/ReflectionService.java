@@ -1,7 +1,9 @@
 package Agona02;
 
 import java.lang.reflect.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -99,6 +101,7 @@ public class ReflectionService {
             throw new RuntimeException(e);
         }
     }
+
     /*
     Метод, который возвращает список методов класса в формате списка имен методов,
     на вход он принимает объект
@@ -136,5 +139,28 @@ public class ReflectionService {
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /*
+    Создать метод, который на вход принимает Class
+    и возвращает список всех его интерфейсов и абстрактных классов в формате список String
+    */
+    public static List<String> getParentsNames(Class<?> clazz) {
+        List<String> parentsNames = new ArrayList<>();
+
+        Class<?>[] parent = clazz.getInterfaces();
+        for (Class<?> aClass : parent) {
+            parentsNames.add(aClass.getName());
+        }
+
+        Class<?> superClass = clazz.getSuperclass();
+        while (superClass != null) {
+            if(Modifier.isAbstract(superClass.getModifiers())) {
+                parentsNames.add(superClass.getName());
+            }
+            superClass = superClass.getSuperclass();
+        }
+
+        return parentsNames;
     }
 }
