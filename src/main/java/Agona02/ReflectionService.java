@@ -148,8 +148,8 @@ public class ReflectionService {
     public static List<String> getParentsNames(Class<?> clazz) {
         List<String> parentsNames = new ArrayList<>();
 
-        Class<?>[] parent = clazz.getInterfaces();
-        for (Class<?> aClass : parent) {
+        Class<?>[] parentInterfaces = clazz.getInterfaces();
+        for (Class<?> aClass : parentInterfaces) {
             parentsNames.add(aClass.getName());
         }
 
@@ -158,9 +158,21 @@ public class ReflectionService {
             if(Modifier.isAbstract(superClass.getModifiers())) {
                 parentsNames.add(superClass.getName());
             }
+
+            Class<?>[] superInterfaces = superClass.getInterfaces();
+            for(Class<?> aClass : superInterfaces) {
+                if(!parentsNames.contains(aClass.getName())) {
+                    parentsNames.add(aClass.getName());
+                }
+            }
+
             superClass = superClass.getSuperclass();
         }
-
         return parentsNames;
+    }
+
+    public static void main(String[] args) {
+        User user = new User();
+        System.out.print(getParentsNames(user.getClass()));
     }
 }
