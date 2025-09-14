@@ -2,6 +2,7 @@ package Agona02;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -100,5 +101,18 @@ public class ReflectionService {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+    /*
+    Метод, который возвращает список методов класса в формате списка имен методов,
+    на вход он принимает объект
+    */
+    public static String[] getMethodsName(Object obj) {
+        Class<?> clazz = obj.getClass();
+        Method[] methods = clazz.getDeclaredMethods();
+        String[] methodsNames = new String[methods.length];
+        for (int i = 0; i < methods.length; i++) {
+            methodsNames[i] = methods[i].getName();
+        }
+        return methodsNames;
     }
 }
