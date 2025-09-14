@@ -81,4 +81,24 @@ public class ReflectionService {
         }
         return fieldsNames;
     }
+
+    /*
+    Создать метод, который меняет значение переменной, без разницы public/private,
+    на вход он принимает Объект, имя переменной и Object(новое значение переменной),
+     */
+    public static void setField(Object obj, String fieldName, Object value) {
+        try {
+            Class<?> clazz = obj.getClass();
+            Field field = clazz.getDeclaredField(fieldName);
+            Class<?> type = field.getType();
+            try {
+                field.set(obj, type.cast(value));
+            } catch (IllegalAccessException e) {
+                field.setAccessible(true);
+                field.set(obj, type.cast(value));
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
