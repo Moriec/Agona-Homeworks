@@ -1,7 +1,9 @@
 package Agona02;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -65,5 +67,18 @@ public class ReflectionService {
             return Float.parseFloat(value);
         }
         throw new IllegalArgumentException("Тип не поддерживается: " + type.getName());
+    }
+
+    /*
+    Метод, который получает на вход наш объект, и возвращает массив String состоящий из имен переменных
+     */
+    public static String[] getAtributesNames(Object obj) {
+        Class<?> clazz = obj.getClass();
+        Field [] fields = clazz.getDeclaredFields();
+        String[] fieldsNames = new String[fields.length];
+        for (int i = 0; i < fields.length; i++) {
+            fieldsNames[i] = fields[i].getName();
+        }
+        return fieldsNames;
     }
 }
