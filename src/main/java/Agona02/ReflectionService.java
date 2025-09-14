@@ -171,8 +171,18 @@ public class ReflectionService {
         return parentsNames;
     }
 
-    public static void main(String[] args) {
-        User user = new User();
-        System.out.print(getParentsNames(user.getClass()));
+    public static void main(String[] args) throws ClassNotFoundException {
+        User user = (User) getInstance("Agona02.User");
+        assert user != null;
+
+        System.out.println(Arrays.toString(getAtributesNames(user)));
+        System.out.println(Arrays.toString(getMethodsName(user)));
+
+        setField(user, "email", "email1@gmail.com");
+        System.out.println(user.email);
+
+        invokeMethod(user, "systemOutHello",  new Object[]{"dima", "email"});
+
+        System.out.println(getParentsNames(User.class));
     }
 }
