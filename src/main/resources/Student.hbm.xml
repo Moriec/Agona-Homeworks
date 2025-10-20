@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="Agona06">
+    <class name="Student" table="student">
+        <id name="studentId" column="student_id">
+            <generator class="identity"/>
+        </id>
+
+        <property name="studentName" column="student_name"
+                  type="string" not-null="true" unique="true"/>
+        <property name="age" column="age" type="integer" not-null="true"/>
+        <property name="gpa" column="gpa" type="float" not-null="true"/>
+        <property name="isActive" column="is_active" type="boolean"/>
+
+        <set name="courses" table="student_course" cascade="all" lazy="true">
+            <key column="student_id"/>
+            <many-to-many class="Course" column="course_id"/>
+        </set>
+    </class>
+</hibernate-mapping>
