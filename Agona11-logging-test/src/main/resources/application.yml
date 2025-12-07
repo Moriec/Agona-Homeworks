@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    org.example.agona11loggingtest: DEBUG
+  starter:
+    enabled: true
+    destination: file
+    fileName: target/test-app.log
+    module: agona11-test
