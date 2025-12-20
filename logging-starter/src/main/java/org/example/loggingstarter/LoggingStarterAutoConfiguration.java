@@ -11,6 +11,7 @@ import jakarta.annotation.PostConstruct;
 import org.example.loggingstarter.aop.ControllerLoggingAspect;
 import org.example.loggingstarter.aop.RepositoryLoggingAspect;
 import org.example.loggingstarter.aop.ServiceLoggingAspect;
+import org.example.loggingstarter.exception.GlobalExceptionHandler;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,6 +41,11 @@ public class LoggingStarterAutoConfiguration {
     @Bean
     public LogbackConfigurer logbackConfigurer(LoggingStarterProperties props) {
         return new LogbackConfigurer(props);
+    }
+
+    @Bean
+    public GlobalExceptionHandler globalExceptionHandler() {
+        return new GlobalExceptionHandler();
     }
 
     public static class LogbackConfigurer {

@@ -13,11 +13,19 @@ public class ControllerLoggingAspect {
         Logger log = LoggerFactory.getLogger(pjp.getSignature().getDeclaringTypeName());
         long start = System.nanoTime();
         Object[] args = pjp.getArgs();
-        Object result = pjp.proceed();
-        long timeMs = (System.nanoTime() - start) / 1_000_000;
-        org.slf4j.MDC.put("execTime", String.valueOf(timeMs));
-        log.info("request={} response={}", java.util.Arrays.toString(args), result);
-        org.slf4j.MDC.remove("execTime");
-        return result;
+        try {
+            Object result = pjp.proceed();
+            long timeMs = (System.nanoTime() - start) / 1_000_000;
+            org.slf4j.MDC.put("execTime", String.valueOf(timeMs));
+            log.info("request={} response={}", java.util.Arrays.toString(args), result);
+            org.slf4j.MDC.remove("execTime");
+            return result;
+        } catch (Throwable t) {
+            long timeMs = (System.nanoTime() - start) / 1_000_000;
+            org.slf4j.MDC.put("execTime", String.valueOf(timeMs));
+            log.info("request={} exception={}", java.util.Arrays.toString(args), t.getClass().getSimpleName());
+            org.slf4j.MDC.remove("execTime");
+            throw t;
+        }
     }
 }
