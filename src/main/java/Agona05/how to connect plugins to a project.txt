@@ -1,0 +1,45 @@
+maven:
+Добавьте в pom xml:
+
+<plugin>
+    <groupId>com.vinogradov</groupId>
+    <artifactId>checkerTodo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <configuration>
+        <developBranch>develop</developBranch>
+        <todoPattern>//\s*(TODO|FIXME).*</todoPattern>
+        <taskPattern>.*(TODO|FIXME)\s+AGONA-\d+.*</taskPattern>
+    </configuration>
+    <executions>
+        <execution>
+            <phase>prepare-package</phase>
+            <goals>
+                <goal>check-todo</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+
+gradle:
+settings.gradle.kts добавить в начало
+
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+build.gradle.kts добавьте:
+
+plugins {
+    id("com.vinogradov.checktodo") version "1.0-SNAPSHOT"
+}
+
+import com.vinogradov.CheckTodoTask
+
+tasks.named<CheckTodoTask>("checkTodo") {
+    taskPattern = ".*AGONA-\\d+.*"
+    developBranch = "develop"
+}
