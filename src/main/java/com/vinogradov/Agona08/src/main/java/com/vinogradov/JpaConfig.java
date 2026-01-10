@@ -24,7 +24,7 @@ public class JpaConfig {
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/agona08DB"); // БД и юзер учебные, в env не выносил
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/agona08DB");
         config.setUsername("postgres");
         config.setPassword("1234");
         config.setDriverClassName("org.postgresql.Driver");
@@ -40,7 +40,7 @@ public class JpaConfig {
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
-        vendorAdapter.setShowSql(false); // важно
+        vendorAdapter.setShowSql(false);
         emf.setJpaVendorAdapter(vendorAdapter);
 
         Map<String, Object> props = new HashMap<>();
