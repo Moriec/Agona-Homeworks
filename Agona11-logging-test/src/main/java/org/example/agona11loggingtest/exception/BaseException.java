@@ -1,4 +1,4 @@
-package org.example.loggingstarter.exception;
+package org.example.agona11loggingtest.exception;
 
 public abstract class BaseException extends RuntimeException {
     

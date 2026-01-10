@@ -8,45 +8,15 @@ import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.ConsoleAppender;
 import ch.qos.logback.core.FileAppender;
 import jakarta.annotation.PostConstruct;
-import org.example.loggingstarter.aop.ControllerLoggingAspect;
-import org.example.loggingstarter.aop.RepositoryLoggingAspect;
-import org.example.loggingstarter.aop.ServiceLoggingAspect;
-import org.example.loggingstarter.exception.GlobalExceptionHandler;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration
 @EnableConfigurationProperties(LoggingStarterProperties.class)
 @ConditionalOnProperty(prefix = "logging.starter", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class LoggingStarterAutoConfiguration {
-
-    @Bean
-    public ControllerLoggingAspect controllerLoggingAspect() {
-        return new ControllerLoggingAspect();
-    }
-
-    @Bean
-    public ServiceLoggingAspect serviceLoggingAspect() {
-        return new ServiceLoggingAspect();
-    }
-
-    @Bean
-    public RepositoryLoggingAspect repositoryLoggingAspect() {
-        return new RepositoryLoggingAspect();
-    }
-
-    @Bean
-    public LogbackConfigurer logbackConfigurer(LoggingStarterProperties props) {
-        return new LogbackConfigurer(props);
-    }
-
-    @Bean
-    public GlobalExceptionHandler globalExceptionHandler() {
-        return new GlobalExceptionHandler();
-    }
 
     public static class LogbackConfigurer {
 

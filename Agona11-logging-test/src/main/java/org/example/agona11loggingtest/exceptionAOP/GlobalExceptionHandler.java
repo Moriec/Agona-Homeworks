@@ -1,5 +1,6 @@
-package org.example.loggingstarter.exception;
+package org.example.agona11loggingtest.exceptionAOP;
 
+import org.example.agona11loggingtest.exception.BaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
