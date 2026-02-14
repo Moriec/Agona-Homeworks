@@ -21,7 +21,7 @@
 | `Agona06` | **Hibernate (ORM)**: Настройка `SessionFactory`, маппинг сущностей `Student` и `Course` (Many-to-Many), реализация репозитория на Hibernate API. | `src/main/java/Agona06/Student.java`, `Course.java`, `HibernateUtil.java`, `StudentRepository.java`. |
 | `Agona07` | **Spring Core (Context)**: Конфигурация через Java-классы (`@Configuration`, `@Bean`), `BeanPostProcessor`, реализация `WebAppInitializer`. | `src/main/java/com/vinogradov/Agona07/...`, `AppConfig.java`, `CustomBeanPostProcessor.java`, `WebAppInitializer.java`. |
 | `Agona08` | **Spring Data JPA**: Использование `JpaRepository`, `@Entity`, JPQL-запросы, проекции и JOIN-ы через интерфейсы репозиториев. | `DemoApplication.java`, `JpaConfig.java`, папки `model/`, `repository/`. |
-| `Agona09` | **Spring Data JPA (Advanced)**: Сложная доменная модель (`User`, `Profile`, `Category`, `Product`, `Order`), транзакционность, связи One-to-One, One-to-Many. | `Agona09/src/main/java/org/example/agona09/App.java`, папки `config/`, `model/`, `repository/`. |
+| `Agona09` | **Spring Data JPA / Liquibase**: Управление миграциями БД через **Liquibase** (`changelog-master.yml`). Сложная доменная модель, транзакционность, связи One-to-One, One-to-Many. | `Agona09/src/main/resources/liquibase/`, `App.java`, папки `config/`, `model/`, `repository/`. |
 | `Agona10` | **jOOQ**: Type-safe SQL запросы в Java. Генерация метамодели БД, использование `DSLContext` для выборок, пагинации и агрегации. | `Agona10/src/main/java/org/example/agona10/AppJooq.java`, папка `config/`. |
 | `Agona11` | **Spring Boot Starter / Spring AOP**: Реализация собственного стартера `logging-starter`, автоконфигурация (`@ConditionalOnProperty`), аспекты (`@Aspect`, `@Around`) для логирования. | `logging-starter/.../LoggingStarterAutoConfiguration.java`, `aop/*.java`. |
 | `Agona11Part2` | **Spring AOP / SLF4J (MDC)**: Расширенное логирование с контекстом (MDC), замер времени выполнения методов, уточнение Pointcut-выражений. | `logging-starter/.../aop/ControllerLoggingAspect.java`, родительский `pom.xml`. |
@@ -30,7 +30,8 @@
 
 - **Язык**: Java 23
 - **Сборка**: Maven, Gradle
-- **Базы данных**: PostgreSQL, SQL, JDBC
+- **Базы данных**: PostgreSQL, H2, SQL, JDBC
 - **ORM / Data Access**: Hibernate, Spring Data JPA, jOOQ
+- **Migrations**: Liquibase
 - **Frameworks**: Spring Framework, Spring Boot
 - **Aspects**: Spring AOP, AspectJ
